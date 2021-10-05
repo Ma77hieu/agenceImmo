@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Property;
 use App\Repository\PropertyRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,6 +43,14 @@ class ListProperties extends AbstractController
         // $this->em->flush();
         return $this->render('property/property.html.twig',[
             'current_menu'=>"properties"
+        ]);
+    }
+
+    public function show(Property $property): Response
+    {
+        return $this->render('property/show.html.twig',[
+            'current_menu'=>"properties",
+            'property'=>$property
         ]);
     }
 }

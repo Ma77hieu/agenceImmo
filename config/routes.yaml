@@ -9,3 +9,9 @@ home:
 ListProperties:
     path: /List
     controller: App\Controller\ListProperties::index
+
+property.show:
+    path: /biens/{slug}-{id}
+    controller: App\Controller\ListProperties::show
+    requirements: 
+        slug: "[a-z0-9\\-]*"
