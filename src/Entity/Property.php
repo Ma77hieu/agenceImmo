@@ -84,7 +84,7 @@ class Property
     /**
      * @ORM\Column(type="boolean",options={"default":false})
      */
-    private $sold =  false;
+    private $sold = false;
 
     public function __construct()
     {

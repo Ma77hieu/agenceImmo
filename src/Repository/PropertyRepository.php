@@ -24,13 +24,10 @@ class PropertyRepository extends ServiceEntityRepository
      */
     public function findAllVisible(): array
     {
-        /**
-         * @var bool
-         */
-        $val=false;
+        // $val=false;
         $result=$this->createQueryBuilder('p')
-        ->where("p.sold = :val")
-        ->setParameter('val', $val)
+        ->where("p.sold = 'false'")
+        // ->setParameter('val', $val)
         ->getQuery()
         ->getResult()
         ;
@@ -44,10 +41,6 @@ class PropertyRepository extends ServiceEntityRepository
      */
     public function findLatest(): array
     {
-        /**
-         * @var bool
-         */
-        $val=false;
         $result=$this->createQueryBuilder('p')
         // ->where("p.sold = :val")
         // ->setParameter('val', $val)

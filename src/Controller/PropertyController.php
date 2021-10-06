@@ -37,12 +37,13 @@ class ListProperties extends AbstractController
         // $em=$this->getDoctrine()->getManager();
         // $em->persist($property);
         // $em->flush();
-        // $property=$this->repository->findAllVisible();
+        $property=$this->repository->findAllVisible();
         // $property[0]->setSold(true);
         // dump($property);
         // $this->em->flush();
         return $this->render('property/property.html.twig',[
-            'current_menu'=>"properties"
+            'current_menu'=>"properties",
+            'properties'=>$property
         ]);
     }
 
