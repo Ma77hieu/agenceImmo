@@ -35,6 +35,18 @@ class PropertyRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function queryAllVisible()
+    {
+        // $val=false;
+        $result2=$this->createQueryBuilder('p')
+        ->where("p.sold = 'false'")
+        // ->setParameter('val', $val)
+        ->getQuery()
+        ;
+        dump($result2);
+        return $result2;
+    }
+
     
     /**
      * @return Property[]
