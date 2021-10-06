@@ -44,6 +44,7 @@ class PropertyRepository extends ServiceEntityRepository
         $result=$this->createQueryBuilder('p')
         // ->where("p.sold = :val")
         // ->setParameter('val', $val)
+        ->where("p.sold = 'false'")
         ->orderBy('p.created_at', 'DESC')
         ->setMaxResults(5)
         ->getQuery()
