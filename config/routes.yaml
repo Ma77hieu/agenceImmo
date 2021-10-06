@@ -23,3 +23,12 @@ admin.property.show:
 admin.property.edit:
     path: /adminlist/{id}/edit
     controller: App\Controller\Admin\AdminPropertyController::edit
+
+admin.property.new:
+    path: /adminlist/new
+    controller: App\Controller\Admin\AdminPropertyController::create
+
+admin.property.delete:
+    path: /adminlist/{id}/delete
+    controller: App\Controller\Admin\AdminPropertyController::delete
+    

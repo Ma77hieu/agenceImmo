@@ -4,9 +4,11 @@ namespace App\Form;
 
 use App\Entity\Property;
 use Symfony\Component\Form\AbstractType;
+// use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class PropertyType extends AbstractType
 {
@@ -27,6 +29,7 @@ class PropertyType extends AbstractType
             ->add('address')
             ->add('postal_code')
             ->add('sold')
+            // ->add('save',ButtonType::class)
         ;
     }
 

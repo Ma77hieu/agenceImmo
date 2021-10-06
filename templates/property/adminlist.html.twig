@@ -19,41 +19,17 @@
                 <td>{{property.title}}</td>
                 <td>
                     <a href="{{ path('admin.property.edit',{id: property.id}) }}" class="btn btn-secondary">Editer</a>
+                    <a href="{{ path('admin.property.delete',{id: property.id}) }}" class="btn btn-danger">Supprimer</a>
                 </td>
-            {# </tr>
-                <td>Chambres:</td>
-                <td>{{property.bedrooms}}</td>
-            </tr>
-                <td>Etage:</td>
-                <td>{{property.floor}}ème</td>
-            </tr>
-                <td>Chauffage:</td>
-                <td>{{property.heatType}}</td> #}
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <div class="text-right">
+    <a href="{{path('admin.property.new')}}" class="btn btn-primary">Nouveau bien</a>
+    </div>
 </div>
 
-{# 
-<div class="container mt-4">
-        <div class="row flex">
-            {% for property in properties %}
-                <div class="col-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="{{ path('property.show', {id:property.id, slug:property.slug})}}">{{property.title}}</a>
-                            </h5>
-                            <p class="card-text">{{property.city}} ({{property.postalcode}})</p>
-                            <p class="text-primary">{{property.formattedPrice}} €</p>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-#}
 {% endblock %}
 
 
