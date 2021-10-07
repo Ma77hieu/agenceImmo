@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Property;
+use App\Entity\SearchProperty;
+use App\Form\PropertySearchType;
 use App\Repository\PropertyRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface as PagerPaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,40 +22,13 @@ class ListProperties extends AbstractController
 
     public function __construct($twig,PropertyRepository $repository,EntityManagerInterface $em)
     {
+
         $this->repository=$repository;
         $this->em=$em;
     }
-    // public function index(): Response
-    // {
-    //     // $property= new Property();
-    //     // $property->setTitle('Premier bien')
-    //     //     ->setPrice(200000) 
-    //     //     ->setRooms(4)
-    //     //     ->setBedrooms(3)
-    //     //     ->setDescription('une descirption standard')
-    //     //     ->setSurface(60)
-    //     //     ->setFloor(4)
-    //     //     ->setHeat(1)
-    //     //     ->setCity('Montpellier')
-    //     //     ->setAddress('15 boulevard Gambetta')
-    //     //     ->setPostalCode('34000');
-    //     // $em=$this->getDoctrine()->getManager();
-    //     // $em->persist($property);
-    //     // $em->flush();
-    //     $property=$this->repository->findAllVisible();
-    //     // $property[0]->setSold(true);
-    //     // dump($property);
-    //     // $this->em->flush();
-    //     return $this->render('property/property.html.twig',[
-    //         'current_menu'=>"properties",
-    //         'properties'=>$property
-    //     ]);
-    // }
 
     public function index(PagerPaginatorInterface $paginator, Request $request): Response
     {
-        // $property= new Property();
-
         $property=$this->repository->queryAllVisible();
         $pagination = $paginator->paginate(
             $property, /* query NOT result */
@@ -63,9 +39,37 @@ class ListProperties extends AbstractController
 
         return $this->render('property/property.html.twig',[
             'current_menu'=>"properties",
-            'properties'=>$property,
             'pagination'=>$pagination
         ]);
+    }
+
+    public function search(PagerPaginatorInterface $paginator,Request $request): Response
+    {
+        $search=new SearchProperty();
+        $form=$this->createForm(PropertySearchType::class,$search);
+        $form->handleRequest($request);
+        
+
+        if($form->isSubmitted() && $form->isValid() || str_contains($request->getRequestUri(),'page='))
+        {
+            $properties=$this->repository->searchFromVisible($search);
+            $pagination = $paginator->paginate(
+                $properties, /* query NOT result */
+                $request->query->getInt('page', 1), /*page number*/
+                6 /*limit per page*/
+            );    
+            return $this->render('property/results.html.twig',[
+                'current_menu'=>"properties",
+                'pagination'=>$pagination
+            ]);
+        }
+        if(!str_contains($request->getRequestUri(),'page='))
+        {
+            return $this->render('property/search.html.twig', [
+                'form'=>$form->createView()
+            ]);
+            
+        }
     }
 
     public function show(Property $property): Response

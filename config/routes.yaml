@@ -16,6 +16,14 @@ property.show:
     requirements: 
         slug: "[a-z0-9\\-]*"
 
+property.search:
+    path: /search
+    controller: App\Controller\ListProperties::search
+
+property.results:
+    path: /results
+    controller: App\Controller\ListProperties::results
+
 admin.property.show:
     path: /adminlist
     controller: App\Controller\Admin\AdminPropertyController::index

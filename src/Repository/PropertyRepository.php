@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Property;
+use App\Entity\SearchProperty;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -43,9 +44,44 @@ class PropertyRepository extends ServiceEntityRepository
         // ->setParameter('val', $val)
         ->getQuery()
         ;
-        dump($result2);
+        dump($result2); 
         return $result2;
     }
+
+    public function searchFromVisible(SearchProperty $search)
+    {
+        $query=$this->createQueryBuilder('s')
+        ->where("s.sold = 'false'");
+        if ($search->getMinPrice())
+        {
+            $value=$search->getMinPrice();
+            $query=$query
+            ->andWhere("s.price >= $value");
+            dump($query);
+        }
+        if ($search->getMaxPrice())
+        {
+            $value=$search->getMaxPrice();
+            $query=$query
+            ->andWhere("s.price <= $value");
+            dump($query);
+        }
+        dump($query);
+        return $query->getQuery();
+    }
+
+    // public function querySearch($params)
+    // {
+    //     $entityProperties=$this->
+    //     foreach ()
+    //     $result2=$this->createQueryBuilder('p')
+    //     ->where("p.sold = 'false'")
+    //     // ->setParameter('val', $val)
+    //     ->getQuery()
+    //     ;
+    //     dump($result2);
+    //     return $result2;
+    // }
 
     
     /**

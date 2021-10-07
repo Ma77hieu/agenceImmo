@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %} Rechercher un bien {% endblock %}
+{% block body %}
+<div class="container col-md-8">
+    <h1> Rechercher un bien </h1>
+    {{ form_start(form)}}
+        {{ form_widget(form) }}
+        <button name="search" id="searchProperty" class="btn btn-primary">Rechercher</button>
+    {{ form_end(form)}}
+    </div>
+
+{% endblock %}
