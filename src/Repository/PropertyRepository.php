@@ -57,14 +57,36 @@ class PropertyRepository extends ServiceEntityRepository
             $value=$search->getMinPrice();
             $query=$query
             ->andWhere("s.price >= $value");
-            dump($query);
         }
         if ($search->getMaxPrice())
         {
             $value=$search->getMaxPrice();
             $query=$query
             ->andWhere("s.price <= $value");
-            dump($query);
+        }
+        if ($search->getMinrooms())
+        {
+            $value=$search->getMinrooms();
+            $query=$query
+            ->andWhere("s.rooms >= $value");
+        }
+        if ($search->getMaxrooms())
+        {
+            $value=$search->getMaxrooms();
+            $query=$query
+            ->andWhere("s.rooms <= $value");
+        }
+        if ($search->getMinsurface())
+        {
+            $value=$search->getMinsurface();
+            $query=$query
+            ->andWhere("s.surface >= $value");
+        }
+        if ($search->getMaxsurface())
+        {
+            $value=$search->getMaxsurface();
+            $query=$query
+            ->andWhere("s.surface <= $value");
         }
         dump($query);
         return $query->getQuery();
